@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{~/css/style.css}" />
+</head>
+<body>
+
+<!--header-->
+<div th:include="parts/userparts/header.html"></div>
+<!--/header-->
+
+<section class="login-page">
+    <h2>Załóż konto</h2>
+    <form th:object="${user}" th:action="@{~/registration}" method="post">
+        <div class="form-group">
+            <label>
+                <input type="text" name="email" th:field="*{name}" placeholder="Imie" /><br><span> </span><br>
+                <span th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}"></span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="text" name="email" th:field="*{surname}" placeholder="Nazwisko" /><br><span> </span><br>
+                <span th:if="${#fields.hasErrors('surname')}"
+                      th:errors="*{surname}"></span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="email" name="email" th:field="*{email}" placeholder="Email" /><br><span> </span><br>
+                <span th:if="${#fields.hasErrors('email')}"
+                      th:errors="*{email}"></span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="password" name="password" placeholder="Hasło" th:field="*{password1}" /><br><span> </span><br>
+                <span th:if="${#fields.hasErrors('password1')}"
+                      th:errors="*{password1}"></span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="password" name="password2" placeholder="Powtórz hasło" th:field="*{password2}"/><br><span> </span><br>
+                <span th:if="${#fields.hasErrors('password2')}"
+                      th:errors="*{password2}"></span><br>
+                <span th:if="${msg==true}"
+                >Hasła muszą byc jednakowe</span>
+            </label>
+        </div>
+
+        <div class="form-group form-group--buttons">
+            <a th:href="@{~/login}" class="btn btn--without-border">Zaloguj się</a>
+            <button class="btn" type="submit">Załóż konto</button>
+        </div>
+    </form>
+</section>
+
+
+<!--footer-->
+<div th:include="parts/userparts/footer.html"></div>
+<!--/footer-->
+
+
+</body>
+</html>

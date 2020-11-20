@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{~/css/style.css}" />
+</head>
+<body>
+
+<!--header-->
+<div th:include="parts/userparts/header.html"></div>
+<!--/header-->
+
+<section class="login-page">
+    <h2>Zmień hasło: </h2>
+    <form th:action="@{~/details/editpass}" method="post" th:object="${passwordDto}">
+        <div class="form-group">
+            <label>
+                <input type="password" th:field="*{pass1}" placeholder="Hasło" /><br><span> </span><br>
+                <span th:if="${#fields.hasErrors('pass1')}"
+                      th:errors="*{pass1}"></span><br>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="password" th:field="*{pass2}" placeholder="Powtórz hasło" /><br><span> </span><br>
+                <span th:if="${#fields.hasErrors('pass2')}"
+                      th:errors="*{pass2}"></span><br>
+            </label>
+            <span th:if="${msg==true}"
+            >Hasła muszą byc jednakowe</span>
+        </div>
+
+        <div class="form-group form-group--buttons">
+            <button class="btn" type="submit">Zmień hasło</button>
+        </div>
+    </form>
+</section>
+
+
+<!--footer-->
+<div th:include="parts/userparts/footer.html"></div>
+<!--/footer-->
+
+
+</body>
+</html>
